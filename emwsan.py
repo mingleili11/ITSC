@@ -287,6 +287,7 @@ class EMWSAN(nn.Module):
         self.conv1 = Conv(1, 64, 15, 2)
         self.conv_embend = ConvEmbedEnd()
         self.patch_emb = PatchEmbed()
+        self.convf = nn.Conv1d(1, 1, 15, 1, 132)
         self.stblock = STBlock()
         self.avgpool = nn.AdaptiveAvgPool1d(1)
         self.norm = nn.LayerNorm(192)
@@ -316,7 +317,7 @@ class EMWSAN(nn.Module):
         #with torch.no_grad():
         feas = []
         x = x.unsqueeze(1)
-        x = self.head3(x)
+        x = self.convf(x)
         x = self.conv1(x)
         x = self.conv_embend(x)
         x = self.patch_emb(x)
