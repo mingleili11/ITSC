@@ -174,7 +174,7 @@ class WindowAttention(nn.Module):
             attn = self.attn_drop(attn)
             feat = (attn @ v).transpose(1, 2).reshape(B_, N//self.num_heads, C)
             feats_out.append(feat)
-        x = self.proj(torch.cat(feats_out, 1))
+        x = torch.cat(feats_out, 1)
         return x
 
 class SwinTransformerBlock(nn.Module):
