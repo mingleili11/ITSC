@@ -317,7 +317,6 @@ class EMWSAN(nn.Module):
         #with torch.no_grad():
         feas = []
         x = x.unsqueeze(1)
-        x = self.convf(x)
         x = self.conv1(x)
         x = self.conv_embend(x)
         x = self.patch_emb(x)
